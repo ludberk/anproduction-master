@@ -6,16 +6,14 @@ import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const uploadDir = "public/images"
+const uploadDir = "src/uploads"
 // Multer diskStorage configuration
 export const multerStorage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Create directory if it doesn't exist
 
     if (!fs.existsSync(uploadDir)) {
-        console.log("salam 2")
       fs.mkdirSync(uploadDir, { recursive: true });
-      console.log("salam 2")
     }
     cb(null, uploadDir);
   },
@@ -31,9 +29,7 @@ export const multerFilter = (req, file, cb) => {
     cb(null, true);
   } else {
     cb(
-      {
-        message: "Unsupported file format",
-      },
+      { message: "Unsupported file format",},
       false
     );
   }

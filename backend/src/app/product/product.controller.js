@@ -63,25 +63,28 @@ export class ProductController {
             throw new APIError("file is empty",403);
         }
         let Product = await ProductService.getFindById(id)
-        console.log("buhissssssssssssssssssssssssssssse")
+
         const uploader = (path) => cloudinaryUploadImg(path, "images")
         const urls = [];
 
         for (const file of files) {
             const { path } = file;
             const newPath = await uploader(path);
-            urls.push(newPath);
+            urls.push(newPath.url);
             fs.unlinkSync(path);
         }
-        console.log("buhisssssssssss222222222222222sssssssssssssssssse")
+
 
         console.log(urls);
 
-        Product.images = urls.map((file) => file);
+        Product.images = Product.images.concat(urls);
 
+        console.log(Product.images);
         const updateProduct = await ProductService.updateById(id,
             Product
         )
+
+        console.log(updateProduct);
 
         return new ApiResponse(
             new ProductDto(updateProduct),
