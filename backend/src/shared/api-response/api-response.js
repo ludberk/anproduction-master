@@ -4,6 +4,14 @@ export class ApiResponse {
     this.message = message;
   }
 
+  mystatuscode(response,code=202){
+    return response.status(code).json({
+      success: true,
+      content: this.content,
+      message: this.message || "The operation was completed successfully.",
+    });
+  }
+
   success(response) {
     return response.status(200).json({
       success: true,

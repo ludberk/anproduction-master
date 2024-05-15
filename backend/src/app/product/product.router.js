@@ -48,6 +48,12 @@ productRouter.get(
 );
 
 productRouter.delete(
+  `${mainPath}/delete`,
+  ProductController.deleteImage
+
+)
+
+productRouter.delete(
   `${mainPath}/delete/:id`,
   ProductController.deleteById
 );

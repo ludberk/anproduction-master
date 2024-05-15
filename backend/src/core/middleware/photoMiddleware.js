@@ -37,7 +37,7 @@ export const multerFilter = (req, file, cb) => {
 
 // Multer instance for file upload
 export const uploadPhoto = multer({
-  storage: multerStorage,
+  dest: "uploads/",
   fileFilter: multerFilter,
   limits: { fieldSize: 200000 },
 });
