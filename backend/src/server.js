@@ -14,6 +14,7 @@ import errorHandlerMiddleware from "./core/middleware/error-handler-middleware.j
 import userRouter from "./app/user/user.route.js";
 import productRouter from "./app/product/product.router.js";
 import categoryRouter from "./app/category/category.router.js";
+import { authMiddleware } from "./core/middleware/authMiddleware.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -53,8 +54,8 @@ server.use(mainPath,userRouter);
 /////////////////////////
 
 server.use("/",userRouter);
-server.use("/",productRouter);
-server.use("/",categoryRouter);
+server.use("/product",authMiddleware,productRouter);
+server.use("/category",authMiddleware,categoryRouter);
 server.use(errorHandlerMiddleware)
 
 

@@ -9,9 +9,9 @@ const SECRET = process.env.TOKEN_SECRET;
 
 export  function authMiddleware(req, res, next){
     let token = req.cookies.authToken;
-    console.log("----------Middlware TOKEN--------");
-    console.log(token);
-    console.log("------------------------");
+     console.log("----------Middlware Section--------");
+    // console.log(token);
+    // console.log("------------------------");
     // const header = req.headers['authorization']
     // const token = header && header.split(" ")[1]   // "Bearer kfjkdsfjkdjfkdsjfkdsjfsdfjsdkfjs"
 
@@ -24,15 +24,15 @@ export  function authMiddleware(req, res, next){
             if (err) {
                 console.log(err)
                 console.log("middlware error")
-                return res.sendStatus(403)
+                return res.status(403).send("Token Forbidden");
             }
             data = data.user;
             req.user = data;
-            console.log("User id ",data)
+            //console.log("User id ",data)
             UserModel.exists({ _id: data._id }).then((userExists) => {
          
                 if (userExists) {
-                    console.log(`\tUserExists ${userExists}`)
+                    //console.log(`\tUserExists ${userExists}`)
                     next();
                 } else {
                     return res.status(403).send("User does not exist");

@@ -30,9 +30,9 @@ export class ProductController {
     }
 
     static async getAll(request, response) {
-        console.log("asdasdsadadsad")
+       // console.log("asdasdsadadsad")
         const data = await ProductService.getAll();
-        console.log(data)
+      //  console.log(data)
         return new ApiResponse(
             data.map((e) => new ProductDto(e)),
             "Product list success"
@@ -73,7 +73,7 @@ export class ProductController {
         const imageUrls = request.body.imageUrls;
         let productImages = Product.images;
         
-        console.log(productImages);
+        //console.log(productImages);
 
         // Both arrays should have the same elements
         for (let i = 0; i < imageUrls.length; i++) {
@@ -98,7 +98,7 @@ export class ProductController {
             else
                 dontdeletedurl.push(url);
 
-            console.log(data.result);
+            //console.log(data.result);
         }
 
         let obj = {
@@ -139,16 +139,16 @@ export class ProductController {
         }
 
 
-        console.log(urls);
+        //onsole.log(urls);
 
         Product.images = Product.images.concat(urls);
 
-        console.log(Product.images);
+       // console.log(Product.images);
         const updateProduct = await ProductService.updateById(id,
             Product
         )
 
-        console.log(updateProduct);
+       // console.log(updateProduct);
 
         return new ApiResponse(
             new ProductDto(updateProduct),

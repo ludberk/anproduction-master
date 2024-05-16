@@ -4,45 +4,45 @@ import { CategoryController } from "./category.controller.js";
 import { CategorySchemaMiddleware } from "./validation/category.middleware.js";
 
 const categoryRouter = express.Router();
-const mainPath = "/category";
+
 
 
 categoryRouter.get(
-    `${mainPath}/get/:id`,
+    `/get/:id`,
     CategoryController.getFindById
 );
 
 categoryRouter.post(
-    `${mainPath}/add`,
+    `/add`,
     CategorySchemaMiddleware,
     CategoryController.add
 );
 
 categoryRouter.put(
-    `${mainPath}/upload/:id`,
+    `/upload/:id`,
     uploadPhoto.single("file"),
     CategoryController.uploadImage
 )
 
 
 categoryRouter.get(
-    `${mainPath}/getall`,
+    `/getall`,
     CategoryController.getAll
 );
 
 categoryRouter.delete(
-    `${mainPath}/delete-image/:id`,
+    `/delete-image/:id`,
     CategoryController.deleteImage
 
 )
 
 categoryRouter.delete(
-    `${mainPath}/delete/:id`,
+    `/delete/:id`,
     CategoryController.deleteById
 );
 
 categoryRouter.patch(
-    `${mainPath}/update/:id`,
+    `/update/:id`,
     CategoryController.updateById
 );
 

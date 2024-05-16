@@ -1,6 +1,7 @@
 import { createTokenByUser } from "../../core/authorization/crypy.js";
 import { comparePassword, createPassword } from "../../core/authorization/passwordMangment.js";
 import { ApiResponse } from "../../shared/api-response/api-response.js";
+import { APIError } from "../../shared/error-response/error-response.js";
 
 import { UserDto } from "./dto/user.dto.js";
 import { UserService } from "./user.service.js";
@@ -14,14 +15,20 @@ export class UserController {
     user.password = await createPassword(newpassword);
     user = await UserService.updateById(user._id, user);
     return new ApiResponse(
-      user
+      new UserDto(user)
     ).success(response);
   }
 
   static async add(request, response) {
     let body = request.body;
-    body.password = await createPassword(body.password);
+    let havauser = await UserService.getAll();
 
+    if(havauser&&havauser.length>0){
+      throw new APIError("have User",403);
+    }
+
+
+    body.password = await createPassword(body.password);
     const data = await UserService.add(body);
 
     return new ApiResponse(

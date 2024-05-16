@@ -15,7 +15,7 @@ export async function comparePassword(stringpassword,hashpassword) {
    
     if(iscompare){
         
-        console.log(iscompare);
+        //console.log(iscompare);
         return true;
     }
 else

@@ -21,14 +21,14 @@ userRouter.get(
 
 userRouter.get(
   `${mainPath}/logout`,
-  onlyUserPasswordSchemaMiddleware,
+  authMiddleware,
   UserController.logout
 );
 
 userRouter.patch(
   `${mainPath}/reset-password`,
-  onlyUserPasswordSchemaMiddleware,
   authMiddleware,
+  onlyUserPasswordSchemaMiddleware,
   UserController.resetPassword
 )
 

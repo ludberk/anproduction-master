@@ -6,7 +6,7 @@ import { uploadPhoto } from "../../core/middleware/photoMiddleware.js";
 import { ProductSchemaMiddleware } from "./validation/product.middleware.js";
 
 const productRouter = express.Router();
-const mainPath = "/product";
+
 
 
 // router.get("/", getAllProducts);
@@ -25,41 +25,42 @@ const mainPath = "/product";
 // router.delete("/:id", authMiddleware, deleteProduct);
 
 productRouter.get(
-  `${mainPath}/get/:id`,
+  `/get/:id`,
   ProductController.getFindById
 );
 
 productRouter.post(
-    `${mainPath}/add`,
+    `/add`,
     ProductSchemaMiddleware,
     ProductController.add
   );
 
 productRouter.put(
-    `${mainPath}/upload/:id`,
+    `/upload/:id`,
     uploadPhoto.array("file", 10),
     ProductController.uploadImages
 )
 
 
 productRouter.get(
-  `${mainPath}/getall`,
+  `/getall`,
   ProductController.getAll
 );
 
 productRouter.delete(
-  `${mainPath}/delete-image/:id`,
+  `/delete-image/:id`,
   ProductController.deleteImages
 
 )
 
 productRouter.delete(
-  `${mainPath}/delete/:id`,
+  `/delete/:id`,
   ProductController.deleteById
 );
 
 productRouter.patch(
-  `${mainPath}/update/:id`,
+  `/update/:id`,
+  ProductSchemaMiddleware,
   ProductController.updateById
 );
 

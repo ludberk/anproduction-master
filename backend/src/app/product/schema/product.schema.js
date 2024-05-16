@@ -15,12 +15,7 @@ const productSchema = Joi.object({
   ironWork: Joi.boolean().required().default(false).messages({
     "boolean.base": "Iron Work must be a boolean",
     "any.required": "Iron Work is required",
-  }),
-  images: Joi.array().items(Joi.string()).messages({
-    "array.base": "Images must be provided as an array",
-    "any.required": "Images are required",
-    "string.base": "Each image must be a string",
-  }),
-}).options({ abortEarly: false, allowUnknown: true });
+  })
+}).options({ abortEarly: false, allowUnknown: false });
 
 export default productSchema;
