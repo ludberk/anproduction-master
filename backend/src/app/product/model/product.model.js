@@ -7,6 +7,7 @@ var productModel = new mongoose.Schema(
             minlength: 3,
             maxLength: 150,
             required: true,
+            trim: true
         },
         furniture: {
             type: Boolean,

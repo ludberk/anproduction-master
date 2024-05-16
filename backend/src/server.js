@@ -13,6 +13,7 @@ import bodyParser from "body-parser";
 import errorHandlerMiddleware from "./core/middleware/error-handler-middleware.js";
 import userRouter from "./app/user/user.route.js";
 import productRouter from "./app/product/product.router.js";
+import categoryRouter from "./app/category/category.router.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -50,10 +51,11 @@ const mainPath = "/api/v1";
 
 server.use(mainPath,userRouter);
 /////////////////////////
-server.use("/",userRouter);
-server.use("/",productRouter)
 
-//server.use(errorHandlerMiddleware)
+server.use("/",userRouter);
+server.use("/",productRouter);
+server.use("/",categoryRouter);
+server.use(errorHandlerMiddleware)
 
 
 

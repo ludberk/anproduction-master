@@ -32,6 +32,7 @@ export  function authMiddleware(req, res, next){
             UserModel.exists({ _id: data._id }).then((userExists) => {
          
                 if (userExists) {
+                    console.log(`\tUserExists ${userExists}`)
                     next();
                 } else {
                     return res.status(403).send("User does not exist");

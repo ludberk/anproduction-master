@@ -48,8 +48,8 @@ productRouter.get(
 );
 
 productRouter.delete(
-  `${mainPath}/delete`,
-  ProductController.deleteImage
+  `${mainPath}/delete-image/:id`,
+  ProductController.deleteImages
 
 )
 

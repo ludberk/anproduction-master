@@ -30,7 +30,9 @@ export class ProductController {
     }
 
     static async getAll(request, response) {
+        console.log("asdasdsadadsad")
         const data = await ProductService.getAll();
+        console.log(data)
         return new ApiResponse(
             data.map((e) => new ProductDto(e)),
             "Product list success"
@@ -38,6 +40,12 @@ export class ProductController {
     }
 
     static async deleteById(request, response) {
+        const Product = await ProductService.getFindById(request.params.id);
+        Product.images.forEach(url => {
+            console.log(url)
+            cloudinaryDeleteImg(url);
+        });
+
         await ProductService.deleteById(request.params.id);
         return new ApiResponse(
             null,
@@ -46,7 +54,7 @@ export class ProductController {
     }
     static async updateById(request, response) {
         let body = request.body;
-        let updateData = await UserService.updateById(
+        let updateData = await ProductService.updateById(
             request.params.id,
             body
         );
@@ -56,7 +64,7 @@ export class ProductController {
         ).success(response);
     }
 
-    static async deleteImage(request, response) {
+    static async deleteImages(request, response) {
         const { id } = request.params;
         if(!id)
             throw new APIError("Write params id",404);
@@ -75,7 +83,7 @@ export class ProductController {
             }
             else{
                 productImages.splice(index, 1);
-                console.log(productImages);
+                //console.log(productImages);
             }
         }
 
