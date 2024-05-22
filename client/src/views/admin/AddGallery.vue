@@ -3,13 +3,10 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
 </script>
 <template>
   <div class="flex flex-col overflow-hidden h-[60vh] justify-between">
-    <!-- Main -->
     <main class="max-w-full h-full flex relative overflow-hidden">
-      <!-- Container -->
       <div
         class="h-full w-full overflow-hidden m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll"
       >
-        <!-- Container -->
         <div
           class="w-full h-60 m-5 rounded-lg flex flex-center flex-shrink-0 flex-grow bg-gray-400"
         >
@@ -19,36 +16,36 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
                 Galereyaya Şəkil Əlavə Et
               </h1>
             </div>
-            <div class="w-full">
-              <div>
-                <label for="foto" class="text-xl font-bold"
-                  >Şəkil Əlavə Et:
-                </label>
+            <form novalidate @submit.prevent="onSubmit">
+              <div class="w-full">
+                <div>
+                  <label for="foto" class="text-xl font-bold"
+                    >Şəkil Əlavə Et
+                  </label>
+                </div>
+                <div>
+                  <input
+                    @change="addFile"
+                    class="m-2 p-2"
+                    type="file"
+                    name="foto"
+                  />
+                </div>
               </div>
               <div>
-                <input
-                  class="m-2 p-2"
-                  type="file"
-                  name="foto"
-                  value="Şəkli Secin"
-                />
+                <button
+                  type="submit"
+                  class="p-2 m-2 w-[190px] border border-2 font-bold h-[8vh]"
+                >
+                  Galereyaya Əlavə Et
+                </button>
               </div>
-            </div>
-            <div>
-              <button
-                type="submit"
-                class="p-2 m-2 w-[190px] border border-2 font-bold h-[8vh]"
-              >
-                Galereyaya Əlavə Et
-              </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
     </main>
   </div>
-
-  <!--Galereya-->
   <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-4 py-12">
     <div class="text-center pb-12">
       <h1
@@ -108,9 +105,55 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
     </div>
   </section>
   <!-- app admin navigation -->
+
   <admin_nav />
 </template>
 
 <style lang="less">
 @import "../../assets/less/base";
 </style>
+
+<script>
+import { getUserApi } from "@/helper/Api.js";
+
+export default {
+  name: "Gallery",
+  data() {
+    return {
+      foto: null,
+      data: [],
+      isLoading: false,
+    };
+  },
+  mounted() {
+    this.fetchUsers();
+  },
+  methods: {
+    addFile(e) {
+      this.foto = e.target.files[0];
+    },
+    onSubmit() {
+      console.log(this.foto);
+      // post the form to the server
+    },
+    async fetchUsers() {
+      this.isLoading = true;
+      try {
+        const response = await getUserApi().then(() => {
+          this.isLoading = false;
+        });
+        this.data = response.data;
+      } catch (error) {
+        console.error("Error fetching users:", error.message);
+      }
+    },
+  },
+
+  // created() {
+  //   getUserApi.then((res)=>{
+  //     this.data=res
+  //   })
+  //
+  // }
+};
+</script>

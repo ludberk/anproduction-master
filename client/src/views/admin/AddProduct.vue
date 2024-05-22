@@ -6,6 +6,7 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
     <!-- Main -->
     <main class="max-w-full h-full flex relative overflow-hidden">
       <!-- Container -->
+
       <div
         class="h-full w-full overflow-hidden m-4 flex flex-wrap items-start justify-start rounded-tl grid-flow-col auto-cols-max gap-4 overflow-y-scroll"
       >
@@ -13,6 +14,7 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
         <div
           class="w-full h-60 m-5 rounded-lg flex flex-center flex-shrink-0 flex-grow bg-gray-400"
         >
+
           <div class="w-full max-w-[600px] m-5 p-5 shadow-lg">
             <div class="w-full text-center">
               <h1 class="font-bold text-2xl m-3 p-5">Məhsul Əlavə Et</h1>
@@ -127,3 +129,4 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
 <style lang="less">
 @import "../../assets/less/base";
 </style>
+
