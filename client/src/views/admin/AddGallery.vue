@@ -25,6 +25,7 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
                 </div>
                 <div>
                   <input
+                    accept="image/*"
                     @change="addFile"
                     class="m-2 p-2"
                     type="file"
@@ -35,7 +36,7 @@ import admin_nav from "../../components/general/admin/admin_nav.vue";
               <div>
                 <button
                   type="submit"
-                  class="p-2 m-2 w-[190px] border border-2 font-bold h-[8vh]"
+                  class="p-2 m-2 w-[190px] border-2 font-bold h-[8vh]"
                 >
                   Galereyaya Əlavə Et
                 </button>
@@ -138,14 +139,10 @@ export default {
     },
     async fetchUsers() {
       this.isLoading = true;
-      try {
-        const response = await getUserApi().then(() => {
-          this.isLoading = false;
-        });
-        this.data = response.data;
-      } catch (error) {
-        console.error("Error fetching users:", error.message);
-      }
+      await getUserApi().then((res) => {
+        this.data = res;
+        this.isLoading = false;
+      });
     },
   },
 
