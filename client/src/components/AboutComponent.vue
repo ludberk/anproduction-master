@@ -4,7 +4,6 @@ import WhatsappItem from "@/components/general/WhatsappItem.vue";
 import FooterItem from "@/components/general/FooterItem.vue";
 import "@/components/AboutComponent.vue";
 </script>
-
 <template>
   <div>
     <!-- WhatsApp Component -->
